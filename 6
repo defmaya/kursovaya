@@ -1,0 +1,30 @@
+Console.WriteLine("Введите число");
+int chisllo = int.Parse(Console.ReadLine());
+for (int i = 1; i < 1000; i++)
+{
+int i1 = i * i;
+for (int j = 1; j < 1000; j++)
+{
+int j1 = j * j;
+for (int d = 1; d < 1000; d++)
+{
+int d1 = d * d;
+int i1j1 = i1 + j1;
+if (i1j1 == d1)
+{
+double S = (i * j) / 2;
+if (chisllo > S)
+{
+Console.WriteLine($"Треугольник со сторонами a={i} b={j} c ={ d}");
+Console.WriteLine($"Площадь треугольника S={S} ");
+}
+if (chisllo < S)
+{
+goto frayr;
+}
+}
+}
+}
+}
+frayr:
+Console.WriteLine();
