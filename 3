@@ -1,0 +1,45 @@
+using System;
+using System.Linq;
+
+namespace WorkOn2And3
+{
+internal class Program
+{
+public static void Main(string[] args)
+{
+Program3();
+}
+
+public static void Program3()
+{
+Console.Write("Введите год: ");
+int c = int.Parse(Console.ReadLine());
+bool leapYear = c % 4 == 0;
+
+int[] monthWith31Days = { 1, 3, 5, 7, 8, 10, 12 };
+
+int[] array = new int[12];
+
+for (var i = 1; i <= 12; i++)
+{
+int index;
+if (monthWith31Days.Contains(i)) index = 31;
+else if (i == 2 && leapYear) index = 29;
+else if (i == 2 && !leapYear) index = 28;
+else index = 30;
+
+for (var j = index; j > 23; j--)
+{
+var dt = new DateTime(c, i, j);
+if (dt.DayOfWeek != DayOfWeek.Thursday) continue;
+array[i - 1] = j;
+break;
+}
+}
+
+Console.WriteLine(string.Join(" ", array));
+
+}
+
+}
+}
