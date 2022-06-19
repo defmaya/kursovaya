@@ -1,0 +1,72 @@
+using System;
+using System.Linq;
+
+namespace WorkOn2And3
+{
+internal class Program
+{
+public static void Main(string[] args)
+{
+Program2();
+}
+
+public static void Program2()
+{
+Console.Write("Введите дату (дд.мм.гг): ");
+int a, b, c;
+string[] date = Console.ReadLine().Split('.');
+a = int.Parse(date[0]);
+b = int.Parse(date[1]);
+c = int.Parse(date[2]);
+
+bool leapYear = c % 4 == 0;
+
+
+int[] monthWith31Days = { 1, 3, 5, 7, 8, 10, 12 };
+int[] monthWith30Days = { 4, 6, 9, 11 };
+
+if ((monthWith31Days.Contains(b) && a > 31) || (monthWith30Days.Contains(b) && a > 30))
+{
+Console.WriteLine("Некорректная дата!");
+return;
+}
+
+if (b == 2 && (leapYear && a > 29 || !leapYear && a > 28))
+{
+Console.WriteLine("Некорректная дата!");
+return;
+}
+
+int indexDay = 0;
+
+for (int i = 1; i < b; i++)
+{
+if (monthWith31Days.Contains(i))
+{
+indexDay += 31;
+}
+else if (monthWith30Days.Contains(i))
+{
+indexDay += 30;
+}
+else if (i == 2 && leapYear)
+{
+indexDay += 29;
+}
+else if (i == 2 && !leapYear)
+{
+indexDay += 28;
+}
+}
+
+indexDay += a;
+Console.WriteLine();
+Console.WriteLine("Порядковый номер выбранного дня: " + indexDay);
+
+int daysToEndYear = leapYear ? 366 - indexDay : 365 - indexDay;
+
+Console.WriteLine("Количество дней до конца года: " + daysToEndYear);
+
+}
+
+}
